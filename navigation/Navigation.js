@@ -2,17 +2,17 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import History from "../src/screens/History";
-import HomeSpaceX from "../src/screens/HomeSpaceX";
+import SpaceXNavigation from "./SpaceXNavigation";
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="HomeSpaceX"
-        component={HomeSpaceX}
+        name="Launches"
+        component={SpaceXNavigation}
         options={{
-          tabBarIcon: () => <Icon name="home" size={20} color="black" />,
+          tabBarIcon: () => <Icon name="rocket" size={20} color="black" />,
         }}
       />
 

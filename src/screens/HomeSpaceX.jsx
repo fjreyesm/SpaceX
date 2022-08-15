@@ -1,11 +1,9 @@
 import React from "react";
-import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
+import { Text, TouchableWithoutFeedback } from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
 import { useState, useEffect } from "react";
 import { getLaunchesApi } from "../api/Launches";
 import LaunchsList from "../components/LaunchsList";
-
-import Rocket from "../components/Rocket";
 
 export default function HomeSpaceX() {
   const [launches, setLaunches] = useState([]);
@@ -23,6 +21,7 @@ export default function HomeSpaceX() {
       const launchsArray = [];
       result.map((launch) => {
         launchsArray.push({
+          key: launch.flight_numer,
           mission_name: launch.mission_name,
           flight_number: launch.flight_number,
           launch_year: launch.launch_year,
@@ -44,7 +43,6 @@ export default function HomeSpaceX() {
       console.log(error);
     }
   };
-  // <img src={launch.links.mission_patch_small} width={200} />
 
   return (
     <ScrollView>

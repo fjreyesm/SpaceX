@@ -1,6 +1,13 @@
 import React from "react";
-import { Text, View, Image, StyleSheet } from "react-native";
-import LaunchCard from "./LaunchCard";
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import Launch from "../screens/Launch";
 
 export default function LaunchsList({ item }) {
   const {
@@ -15,29 +22,39 @@ export default function LaunchsList({ item }) {
     reference_system,
   } = item;
 
-  // console.log("tipo de arr es : " + typeof arr);
-  //console.log(JSON.parse(JSON.stringify(launch)));
+  const navigation = useNavigation();
 
-  console.log("en LaunchList props recibidas ==>" + mission_name);
+  const goToLaunch = () => {
+    return navigation.navigate("Launch");
+  };
+
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.card}>
-        <View style={styles.imagen}>
-          <Image source={{ uri: url_img }} style={{ width: 60, height: 60 }} />
-        </View>
-        <View style={styles.inf}>
-          <Text style={{ fontSize: 20 }}> {mission_name} </Text>
-          <Text> {rocket_name} </Text>
-          <Text> {launch_year} </Text>
-          <Text> {manufacturer} </Text>
-          <Text> {reference_system} </Text>
-        </View>
-        <View style={styles.cap_view}>
-          <Text style={styles.capsules}> {orbit}</Text>
-          <Text style={styles.capsules}> {payload_type} </Text>
+    <TouchableWithoutFeedback onPress={goToLaunch}>
+      <View style={styles.wrapper}>
+        <View style={styles.card}>
+          <View style={styles.imagen}>
+            <Image
+              source={{ uri: url_img }}
+              style={{ width: 60, height: 60 }}
+            />
+          </View>
+          <View style={styles.inf}>
+            <Text style={{ fontSize: 20 }}>
+              {" "}
+              {mission_name} {flight_number}{" "}
+            </Text>
+            <Text> {rocket_name} </Text>
+            <Text> {launch_year} </Text>
+            <Text> {manufacturer} </Text>
+            <Text> {reference_system} </Text>
+          </View>
+          <View style={styles.cap_view}>
+            <Text style={styles.capsules}> {orbit}</Text>
+            <Text style={styles.capsules}> {payload_type} </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
