@@ -1,5 +1,5 @@
 import { API_URL } from "../utils/constants";
-import { HIST_API_URL } from "../utils/constants";
+
 import React from "react";
 
 export async function getLaunchesApi() {
@@ -16,6 +16,7 @@ export async function getLaunchesApi() {
 export async function getLaunchApiByFlightNumberApi(flightNumber) {
   try {
     const url = `${API_URL}/launches/${flightNumber}`;
+    console.log("url: " + url);
     const response = await fetch(url);
     const result = await response.json();
     return result;

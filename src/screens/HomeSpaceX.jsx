@@ -37,8 +37,6 @@ export default function HomeSpaceX() {
         });
       });
       setLaunches([...launches, ...launchsArray]);
-      console.log(" launches tipo " + typeof launches);
-      console.log(" launches " + launches.length);
     } catch (error) {
       console.log(error);
     }
@@ -46,8 +44,6 @@ export default function HomeSpaceX() {
 
   return (
     <ScrollView>
-      <Text>SpaceXss Screen </Text>
-
       {launches.map((item) => (
         <>
           <LaunchsList key={item.flight_numer} item={item} />

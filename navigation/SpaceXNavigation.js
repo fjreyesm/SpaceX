@@ -1,9 +1,9 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeSpaceX from "../src/screens/HomeSpaceX";
 import Launch from "../src/screens/Launch";
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function SpaceXNavigation() {
   return (

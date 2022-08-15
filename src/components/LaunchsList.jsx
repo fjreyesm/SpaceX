@@ -25,7 +25,7 @@ export default function LaunchsList({ item }) {
   const navigation = useNavigation();
 
   const goToLaunch = () => {
-    return navigation.navigate("Launch");
+    return navigation.navigate("Launch", { id: flight_number });
   };
 
   return (
