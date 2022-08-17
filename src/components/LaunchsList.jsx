@@ -39,10 +39,7 @@ export default function LaunchsList({ item }) {
             />
           </View>
           <View style={styles.inf}>
-            <Text style={{ fontSize: 20 }}>
-              {" "}
-              {mission_name} {flight_number}{" "}
-            </Text>
+            <Text style={styles.title}>{mission_name} </Text>
             <Text> {rocket_name} </Text>
             <Text> {launch_year} </Text>
             <Text> {manufacturer} </Text>
@@ -72,6 +69,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 10,
     alignItems: "center",
+  },
+
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 
   inf: {
