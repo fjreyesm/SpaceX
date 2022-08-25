@@ -8,7 +8,6 @@ export default function Launch(props) {
   const navigation = useNavigation();
   const [details, setDetails] = useState([]);
 
-  console.log("launch parametro ");
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -24,9 +23,7 @@ export default function Launch(props) {
   const loadLaunch = async () => {
     try {
       const result = await getLaunchApiByFlightNumberApi(props.route.params.id);
-      console.log("result of Lauch detail" + { result });
       setDetails(result);
-      console.log("details " + { details });
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +31,11 @@ export default function Launch(props) {
   // getLaunchApiByFlightNumberApi(flightNumber);
   return (
     <View style={styles.wrapper}>
-      <Image source={{}} />
+      <Image
+        source={{ uri: "https://i.imgur.com/s0nFhtt.jpg" }}
+        style={{ width: 400, height: 250 }}
+      />
+
       <Text style={styles.title}> {details.mission_name}</Text>
 
       <View style={styles.subtitle}>
@@ -44,37 +45,32 @@ export default function Launch(props) {
         <Text> {details.launch_year}</Text>
       </View>
       <View style={styles.rocket}>
-        <Text style={styles.text}>Rocket </Text>
-        <Text style={styles.text}>{details.rocket?.rocket_name}</Text>
-        <Text style={styles.text}>Type: {details.rocket?.rocket_type}</Text>
+        <Text style={styles.capsules}>Rocket </Text>
+        <Text style={styles.capsules}>{details.rocket?.rocket_name}</Text>
+        <Text style={styles.capsules}>Type: {details.rocket?.rocket_type}</Text>
       </View>
-      <Text style={styles.text}>
-        {details.launch_success ? "Success" : "Failure"}
-      </Text>
+      <View style={styles.rocket}>
+        <Text style={styles.failure}>
+          {details.launch_success ? "Success" : "Failure"}
+        </Text>
+      </View>
 
       <Text style={styles.details}> Details: {details.details}</Text>
       <View>
         <Text style={styles.text}>{details.launch_site?.site_name_long}</Text>
         <Text style={styles.text}> {details.launch_date_utc}</Text>
       </View>
-      <Button
-        title="Next Launch"
-        type="outline"
-        onPress={() => Alert.alert("Simple Button pressed")}
-        accessibilityLabel="Learn more about this purple button"
-      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: "#fff",
+    flex: 1,
+    backgroundColor: "white",
     margin: 10,
     borderRadius: 20,
-    height: "80%",
+    height: "100%",
     justifyContent: "space-between",
   },
   items: {
@@ -84,7 +80,7 @@ const styles = StyleSheet.create({
   },
 
   rocket: {
-    margin: 10,
+    margin: 5,
     alignItems: "center",
   },
 
@@ -110,14 +106,35 @@ const styles = StyleSheet.create({
   },
 
   imagen: {
-    width: "20%",
-    height: 40,
-    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "orange",
   },
 
   text: {
     marginTop: 15,
+  },
+
+  failure: {
+    borderRadius: 15,
+    overflow: "hidden",
+    borderWidth: 1,
+    fontSize: 13,
+    textAlign: "center",
+    margin: 5,
+    padding: 5,
+    backgroundColor: "lightgrey",
+    width: "55%",
+  },
+
+  capsules: {
+    borderRadius: 15,
+    overflow: "hidden",
+    borderWidth: 1,
+    fontSize: 12,
+    textAlign: "center",
+    margin: 5,
+    padding: 5,
+    backgroundColor: "lightgrey",
+    width: "25%",
   },
 });

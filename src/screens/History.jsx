@@ -4,6 +4,8 @@ import { ScrollView } from "react-native-virtualized-view";
 import { useState, useEffect } from "react";
 import { getHistoryApi } from "../api/Launches";
 import FactsList from "../components/FactsList";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 export default function History() {
   const [facts, setFacts] = useState([]);
@@ -17,7 +19,6 @@ export default function History() {
   const loadHistApi = async () => {
     try {
       const result = await getHistoryApi();
-      console.log("result " + { result });
       setFacts([...result]);
     } catch (error) {
       console.log(error);
@@ -26,12 +27,8 @@ export default function History() {
 
   return (
     <ScrollView>
-      <Text>History Facts</Text>
-
       {facts.map((item) => (
-        <>
-          <FactsList key={item.id} item={item} />
-        </>
+        <FactsList key={uuidv4()} item={item} />
       ))}
     </ScrollView>
   );

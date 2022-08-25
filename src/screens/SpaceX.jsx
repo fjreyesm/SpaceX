@@ -1,9 +1,10 @@
 import React from "react";
-import { Text, TouchableWithoutFeedback } from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
 import { useState, useEffect } from "react";
 import { getLaunchesApi } from "../api/Launches";
 import LaunchsList from "../components/LaunchsList";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 export default function HomeSpaceX() {
   const [launches, setLaunches] = useState([]);
@@ -17,11 +18,11 @@ export default function HomeSpaceX() {
   const loadLaunchs = async () => {
     try {
       const result = await getLaunchesApi();
-      console.log("result " + { result });
+
       const launchsArray = [];
       result.map((launch) => {
         launchsArray.push({
-          key: launch.flight_numer,
+          id: launch.flight_number,
           mission_name: launch.mission_name,
           flight_number: launch.flight_number,
           launch_year: launch.launch_year,
@@ -31,6 +32,7 @@ export default function HomeSpaceX() {
           orbit: launch.rocket.second_stage.payloads[0].orbit,
           payload_type: launch.rocket.second_stage.payloads[0].payload_type,
           manufacturer: launch.rocket.second_stage.payloads[0].manufacturer,
+
           reference_system:
             launch.rocket.second_stage.payloads[0].orbit_params
               .reference_system,
@@ -45,9 +47,7 @@ export default function HomeSpaceX() {
   return (
     <ScrollView>
       {launches.map((item) => (
-        <>
-          <LaunchsList key={item.flight_numer} item={item} />
-        </>
+        <LaunchsList key={uuidv4()} item={item} />
       ))}
     </ScrollView>
   );
